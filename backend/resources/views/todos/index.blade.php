@@ -1,27 +1,14 @@
 <!doctype html>
 <html lang="ja">
   <head>
-    <title>Jum Todoリスト</title>
-  <!-- 必要なメタタグ -->
+    <title>Todoリスト</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="css/styles.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
   </head>
   <body>
-  <!doctype html>
-  <html lang="ja">
-    <head>
-      <title>Bootstrap基本テンプレート</title>
-    <!-- 必要なメタタグ -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    </head>
-    <body>
     <div class="container">
       <h1>Todos</h1>
       <div class="input_form">
@@ -52,7 +39,35 @@
       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    </body>
-  </html>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   </body>
 </html>
+
+<script>
+$(function(){
+  $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+  });
+  $('input[name="check"]').change(function(event){
+    console.log('ok')
+    $.ajax({
+      type: "PUT",
+      url: "/todos/29", /* 動的に変更する必要あり */
+      datatype: "json",
+      data: {
+        "id": $("new_todo_form").val(),
+        "body": "買い物に行く2", /* 動的に変更する必要あり */
+        "done": "0"　/* 動的に変更する必要あり */
+      },
+      //通信が成功した時
+      success: function(data){
+        console.log(data);
+      }
+    })
+  });
+  return false;
+
+});
+</script>
