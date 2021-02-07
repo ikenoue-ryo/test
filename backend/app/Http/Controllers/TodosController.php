@@ -26,8 +26,10 @@ class TodosController extends Controller
 		return redirect('/');
 	}
 
-	public function cancel(todo $todo){
-		$todo->delete();
+	public function cancel(Request $request, $id) {
+		$todo = Todo::find($id);
+		$todo->done = $request->done;
+		$todo->save();
 		return redirect('/');
 	}
 
