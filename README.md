@@ -3,11 +3,11 @@ Laravel 6.20.16
 
 # 起動
 docker-compose up -d --build  
-docker-compose exec app bash
-composer install
-cp .env.example .env
-php artisan key:generate
-php artisan migrate
+docker-compose exec app bash  
+composer install  
+cp .env.example .env  
+php artisan key:generate  
+php artisan migrate  
 
 <!-- コマンド
 docker-compose exec app php artisan serve --host localhost --port 10080
