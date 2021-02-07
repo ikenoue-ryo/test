@@ -19,3 +19,5 @@
 
 Route::get('/','TodosController@index');
 Route::resource('todos','TodosController');
+Route::patch('/todos/{todo}/done','TodosController@done');
+Route::delete('/todos/{todo}/cancel','TodosController@cancel');

@@ -19,11 +19,15 @@ class TodosController extends Controller
 		return redirect('/');
 	}
 
-	public function put(Request $request) {
-		$todo = new Todo();
-		$todo->body = $request->body;
+	public function done(Request $request) {
+		$todo = Todo::find($request->id);
 		$todo->done = $request->done;
 		$todo->save();
+		return redirect('/');
+	}
+
+	public function cancel(todo $todo){
+		$todo->delete();
 		return redirect('/');
 	}
 

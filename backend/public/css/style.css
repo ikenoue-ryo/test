@@ -20,6 +20,10 @@ input{
 	padding: 10px;
 }
 
+.input_class{
+	padding: 7px;
+}
+
 .input_form{
 	text-align: center;
 }
