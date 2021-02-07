@@ -19,8 +19,8 @@ class TodosController extends Controller
 		return redirect('/');
 	}
 
-	public function done(Request $request) {
-		$todo = Todo::find($request->id);
+	public function done(Request $request, $id) {
+		$todo = Todo::find($id);
 		$todo->done = $request->done;
 		$todo->save();
 		return redirect('/');

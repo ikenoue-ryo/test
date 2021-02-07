@@ -32,7 +32,7 @@
           <form action="{{ url('/todos', $todo->id) }}" method="post">
             @method('PATCH')
             @csrf
-            <input type="checkbox" checked="checked" value="{{$todo->done}}" name="check" id="new_todo_form">
+            <input type="checkbox" checked="checked" value="{{$todo->id}}" name="check" id="new_todo_form">
           </form>
         </td>
         @else
@@ -40,7 +40,7 @@
           <form action="{{ url('/todos', $todo->id) }}" method="post">
             @method('PATCH')
             @csrf
-            <input type="checkbox" value="{{$todo->done}}" name="check" id="new_todo_form">
+            <input type="checkbox" value="{{$todo->id}}" name="check" id="new_todo_form">
           </form>
           </td>
         @endif
@@ -84,7 +84,6 @@ $(function(){
       datatype: "json",
       data: {
         "id": $("new_todo_form").val(),
-        "done": "1"
       },
       //通信が成功した時
       success: function(data){
