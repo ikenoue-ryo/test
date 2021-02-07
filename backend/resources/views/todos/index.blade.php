@@ -79,15 +79,17 @@ $(function(){
     var $target = $(event.currentTarget);
     var id = $target.data('id');
     console.log(id)
+
     var method = $target.prop('checked') ? 'PATCH':'DELETE';
     var url = $target.prop('checked') ? '/todos/' + id + '/done' : '/todos/' + id + '/cancel';
+    var num = $target.prop('checked') ? 1 : 0;
     $.ajax({
       type: method,
       url: url,
       datatype: "json",
       data: {
         "id": id,
-        "done": 1,
+        "done": num,
       },
       //通信が成功した時
       success: function(data){
