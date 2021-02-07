@@ -32,7 +32,7 @@
           <form action="{{ url('/todos', $todo->id) }}" method="post">
             @method('PATCH')
             @csrf
-            <input type="checkbox" checked="checked" value="{{$todo->id}}" name="check" id="new_todo_form">
+            <input type="checkbox" checked="checked" value="{{$todo->id}}" name="check" id="new_todo_form" data-done-url="{{$todo->id}}">
           </form>
         </td>
         @else
@@ -40,7 +40,7 @@
           <form action="{{ url('/todos', $todo->id) }}" method="post">
             @method('PATCH')
             @csrf
-            <input type="checkbox" value="{{$todo->id}}" name="check" id="new_todo_form">
+            <input type="checkbox" value="{{$todo->id}}" name="check" id="new_todo_form" data-done-url="{{$todo->id}}">
           </form>
           </td>
         @endif
@@ -75,7 +75,6 @@ $(function(){
   });
   $('input[name="check"]').change(function(event){
     // もしチェックが入ったら
-    console.log('ok')
     var method = $(event.currentTarget).prop('checked') ? 'PATCH':'DELETE'
     var url = $(event.currentTarget).prop('checked') ? '/todos/2/done' : '/todos/2/cancel'
     $.ajax({
