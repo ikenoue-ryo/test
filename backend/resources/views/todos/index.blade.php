@@ -32,7 +32,8 @@
           <form action="{{ url('/todos', $todo->id) }}" method="post">
             @method('PATCH')
             @csrf
-            <input type="checkbox" checked="checked" value="{{$todo->id}}" name="check" id="new_todo_form" data-done-url="{{$todo->id}}">
+            {{-- <input type="checkbox" checked="checked" value="{{$todo->id}}" name="check" id="new_todo_form" data-done-url="{{$todo->id}}"> --}}
+            <input type="checkbox" checked="checked" data-id="{{ $todo->id }}" name="check" id="new_todo_form">
           </form>
         </td>
         @else
@@ -40,7 +41,8 @@
           <form action="{{ url('/todos', $todo->id) }}" method="post">
             @method('PATCH')
             @csrf
-            <input type="checkbox" value="{{$todo->id}}" name="check" id="new_todo_form" data-done-url="{{$todo->id}}">
+            {{-- <input type="checkbox" value="{{$todo->id}}" name="check" id="new_todo_form" data-done-url="{{$todo->id}}"> --}}
+            <input type="checkbox" data-id="{{ $todo->id }}" name="check" id="new_todo_form">
           </form>
           </td>
         @endif
@@ -74,16 +76,18 @@ $(function(){
         }
   });
   $('input[name="check"]').change(function(event){
-    // もしチェックが入ったら
-    var method = $(event.currentTarget).prop('checked') ? 'PATCH':'DELETE'
-    var url = $(event.currentTarget).prop('checked') ? '/todos/2/done' : '/todos/2/cancel'
+    var $target = $(event.currentTarget);
+    var id = $target.data('id');
+    console.log(id)
+    var method = $target.prop('checked') ? 'PATCH':'DELETE';
+    var url = $target.prop('checked') ? '/todos/' + id + '/done' : '/todos/' + id + '/cancel';
     $.ajax({
       type: method,
       url: url,
       datatype: "json",
       data: {
-        "id": $("new_todo_form").val(),
-        "done": 0,
+        "id": id,
+        "done": 1,
       },
       //通信が成功した時
       success: function(data){
@@ -91,6 +95,5 @@ $(function(){
       }
     })
   });
-  return false;
 });
 </script>
